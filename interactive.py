@@ -6,11 +6,12 @@ class TileArtModel:
     """ Encodes the game state """
     def __init__(self):
         self.tiles = []
-        for x in range(10, 100, 200):
-            tile = Tile((0, 255, 0), x, 10)
-            self.tiles.append(tile)
-        # self.paddle = Paddle((255, 255, 255), 20, 100, 200, 450)
-
+        positions = (10, 50, 100)
+        for x in positions:
+            newtile = Tile((0, 255, 0), x, 120)
+            print(x)
+            self.tiles.append(newtile)
+        
 
 class Tile:
     '''definition of a singular tile'''
