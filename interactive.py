@@ -21,7 +21,7 @@ class Column:
     '''definition of a column'''
     def __init__(self, color, x, y):
         self.tiles = []
-        positions = (10, 60, 110, 160, 210, 260, 310)
+        positions = (10, 60, 110, 160, 210, 260, 310, 360)
         for y in positions:
             newtile = Tile(color, x, y)
             self.tiles.append(newtile)
@@ -39,14 +39,20 @@ class Tile:
 
 class Instrument:
     '''defines attributes of an instrument'''
-    def __init__(self): # , instr_name, notes_list):
+    def __init__(self, notes_list):
         note_dict = dict()
         note_names = ['c', 'd', 'e', 'f', 'g', 'a', 'b', 'C']
-        for i in range(0, 7):
+        for i in range(0, 8):
             pygame.mixer.music.load(notes_list[i])
-            note_dict[note_names[i]] = pygame.mixer.Sound(note)
+            note_dict[note_names[i]] = pygame.mixer.Sound(notes_list[i])
         self.c = note_dict['c']
-        self.d = note_dict
+        self.d = note_dict['d']
+        self.e = note_dict['e']
+        self.f = note_dict['f']
+        self.g = note_dict['g']
+        self.a = note_dict['a']
+        self.b = note_dict['b']
+        self.C = note_dict['C']
 
 
 class Cursor:
@@ -80,7 +86,10 @@ class TileArtWindowView:
 if __name__ == '__main__':
     pygame.init()
     pygame.mixer.init()
-    ins = Instrument
+    guitar = Instrument(['c6gui.wav', 'd6guit.wav', 'e6guit.wav',
+                         'f6guit.wav', 'g6guit.wav', 'a6guit.wav',
+                         'b6guit.wav', 'c7guit.wav'])
+    guitar.e.play()
     color_dict = {'green': (0, 255, 0),
                   'blue': (0, 0, 255),
                   'red': (255, 0, 0),
@@ -90,7 +99,7 @@ if __name__ == '__main__':
                   'white': (255, 255, 255)
                   }
 
-    size = (810, 360)
+    size = (810, 410)
     screen = pygame.display.set_mode(size)
 
     model = TileArtModel()
