@@ -5,7 +5,7 @@ import time
 class TileArtModel:
     """ Encodes the game state """
     def __init__(self, num_columns=16, tile_size=40, border_size=10):
-        self.cursor = Cursor((0, 0, 255), 30, 30)
+        self.cursor = Cursor((150, 100, 200), 30, 30)
         positions = [border_size]
         for i in range(num_columns):
             positions.append(positions[i] + tile_size + border_size)
@@ -93,7 +93,16 @@ class TileArtController:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['white']
             elif event.key == pygame.K_g:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['gray']
-
+            elif event.key == pygame.K_y:
+                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['yellow']
+            elif event.key == pygame.K_p:
+                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['purple']
+            elif event.key == pygame.K_b:
+                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['blue']
+            elif event.key == pygame.K_e:
+                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['green']
+            elif event.key == pygame.K_t:
+                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['teal']
 
 class TileArtWindowView:
     """ A view of brick breaker rendered in a Pygame window """
@@ -118,18 +127,26 @@ class TileArtWindowView:
                          self.model.cursor.width)
         pygame.display.update()
 
+    def read_column(self):
+        for column in self.model.columns:newtile = Tile(color, x, y)
+                positions.append(positions[i] + tile_size + border_size)
+            for i in range(8):
+                if columns[i].color = 'red'
+                newtile = Tile(color, x, y)
+                positions.append(positions[i] + tile_size + border_size)
+
 
 if __name__ == '__main__':
     pygame.init()
     pygame.mixer.init()
-    guitar = Instrument(['c6gui.wav', 'd6guit.wav', 'e6guit.wav',
-                         'f6guit.wav', 'g6guit.wav', 'a6guit.wav',
-                         'b6guit.wav', 'c7guit.wav'])
-    guitar.e.play()
+#    guitar = Instrument(['c6gui.wav', 'd6guit.wav', 'e6guit.wav',
+#                         'f6guit.wav', 'g6guit.wav', 'a6guit.wav',
+#                         'b6guit.wav', 'c7guit.wav'])
+#    guitar.e.play()
     color_dict = {'green': (0, 255, 0),
                   'blue': (0, 0, 255),
                   'red': (255, 0, 0),
-                  'purple': (255, 0, 255),
+                  'purple': (200, 50, 200),
                   'teal': (0, 255, 255),
                   'yellow': (255, 255, 0),
                   'white': (255, 255, 255),
