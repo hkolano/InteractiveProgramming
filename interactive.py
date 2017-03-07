@@ -94,6 +94,7 @@ class TileArtController:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['white']
             elif event.key == pygame.K_g:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['gray']
+<<<<<<< HEAD
             elif event.key == pygame.K_y:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['yellow']
             elif event.key == pygame.K_p:
@@ -104,6 +105,9 @@ class TileArtController:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['green']
             elif event.key == pygame.K_t:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['teal']
+=======
+
+>>>>>>> parent of e3f87bf... with the couple channel lines
 
 class TileArtWindowView:
     """ A view of brick breaker rendered in a Pygame window """
@@ -140,10 +144,17 @@ class TileArtWindowView:
 if __name__ == '__main__':
     pygame.init()
     pygame.mixer.init()
+<<<<<<< HEAD
 #    guitar = Instrument(['c6gui.wav', 'd6guit.wav', 'e6guit.wav',
 #                         'f6guit.wav', 'g6guit.wav', 'a6guit.wav',
 #                         'b6guit.wav', 'c7guit.wav'])
 #    guitar.e.play()
+=======
+    guitar = Instrument(['c6gui.wav', 'd6guit.wav', 'e6guit.wav',
+                         'f6guit.wav', 'g6guit.wav', 'a6guit.wav',
+                         'b6guit.wav', 'c7guit.wav'])
+    guitar.e.play()
+>>>>>>> parent of e3f87bf... with the couple channel lines
     color_dict = {'green': (0, 255, 0),
                   'blue': (0, 0, 255),
                   'red': (255, 0, 0),
