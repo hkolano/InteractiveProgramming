@@ -40,6 +40,8 @@ class Instrument:
     def __init__(self, notes_list):
         note_dict = dict()
         note_names = ['c', 'd', 'e', 'f', 'g', 'a', 'b', 'C']
+        self.channel1 = pygame.mixer.Channel(1)
+        self.channel2 = pygame.mixer.Channel(2)
         for i in range(0, 8):
             pygame.mixer.music.load(notes_list[i])
             note_dict[note_names[i]] = pygame.mixer.Sound(notes_list[i])
@@ -74,25 +76,24 @@ class TileArtController:
     def handle_keydown_event(self, event):
         column_of_tile = self.model.cursor.whichcolumn
         row_of_tile = self.model.cursor.whichrow
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                self.model.cursor.pos[0] += -50
-                self.model.cursor.whichcolumn += -1
-            elif event.key == pygame.K_RIGHT:
-                self.model.cursor.pos[0] += +50
-                self.model.cursor.whichcolumn += 1
-            elif event.key == pygame.K_UP:
-                self.model.cursor.pos[1] += -50
-                self.model.cursor.whichrow += -1
-            elif event.key == pygame.K_DOWN:
-                self.model.cursor.pos[1] += +50
-                self.model.cursor.whichrow += 1
-            elif event.key == pygame.K_r:
-                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['red']
-            elif event.key == pygame.K_w:
-                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['white']
-            elif event.key == pygame.K_g:
-                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['gray']
+        if event.key == pygame.K_LEFT:
+            self.model.cursor.pos[0] += -50
+            self.model.cursor.whichcolumn += -1
+        elif event.key == pygame.K_RIGHT:
+            self.model.cursor.pos[0] += +50
+            self.model.cursor.whichcolumn += 1
+        elif event.key == pygame.K_UP:
+            self.model.cursor.pos[1] += -50
+            self.model.cursor.whichrow += -1
+        elif event.key == pygame.K_DOWN:
+            self.model.cursor.pos[1] += +50
+            self.model.cursor.whichrow += 1
+        elif event.key == pygame.K_r:
+            self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['red']
+        elif event.key == pygame.K_w:
+            self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['white']
+        elif event.key == pygame.K_g:
+            self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['gray']
 
 
 class TileArtWindowView:
@@ -125,7 +126,15 @@ if __name__ == '__main__':
     guitar = Instrument(['c6gui.wav', 'd6guit.wav', 'e6guit.wav',
                          'f6guit.wav', 'g6guit.wav', 'a6guit.wav',
                          'b6guit.wav', 'c7guit.wav'])
-    guitar.e.play()
+    guitar.channel1.play(guitar.e)
+    guitar.channel2.play(guitar.b)
+    time.sleep(.75)
+    guitar.channel1.play(guitar.g)
+    guitar.channel2.play(guitar.c)
+    time.sleep(.75)
+    guitar.channel1.play(guitar.e)
+    guitar.channel2.play(guitar.b)
+    time.sleep(.75)
     color_dict = {'green': (0, 255, 0),
                   'blue': (0, 0, 255),
                   'red': (255, 0, 0),
