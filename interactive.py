@@ -72,6 +72,8 @@ class TileArtController:
         self.model = model
 
     def handle_keydown_event(self, event):
+        column_of_tile = self.model.cursor.whichcolumn
+        row_of_tile = self.model.cursor.whichrow
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 self.model.cursor.pos[0] += -50
@@ -86,9 +88,11 @@ class TileArtController:
                 self.model.cursor.pos[1] += +50
                 self.model.cursor.whichrow += 1
             elif event.key == pygame.K_r:
-                column_of_tile = self.model.cursor.whichcolumn
-                row_of_tile = self.model.cursor.whichrow
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['red']
+            elif event.key == pygame.K_w:
+                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['white']
+            elif event.key == pygame.K_g:
+                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['gray']
 
 
 class TileArtWindowView:
@@ -128,7 +132,8 @@ if __name__ == '__main__':
                   'purple': (255, 0, 255),
                   'teal': (0, 255, 255),
                   'yellow': (255, 255, 0),
-                  'white': (255, 255, 255)
+                  'white': (255, 255, 255),
+                  'gray': (100, 100, 100)
                   }
 
     size = (810, 410)
