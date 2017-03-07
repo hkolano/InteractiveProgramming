@@ -1,11 +1,13 @@
 import pygame
 import time
 
+'''music files'''
+
+
 
 class TileArtModel:
     """ Encodes the game state """
     def __init__(self, num_columns=16, tile_size=40, border_size=10):
-        self.cursor = Cursor((0, 0, 255), 30, 30)
         positions = [border_size]
         for i in range(num_columns):
             positions.append(positions[i] + tile_size + border_size)
@@ -54,41 +56,11 @@ class Instrument:
 
 
 class Cursor:
-    """ Encodes the state of the cursor in the game """
-    def __init__(self, color, x, y, radius=10, width=0, column=0, row=0):
-        self.color = color
-        self.x = x
-        self.y = y
-        self.pos = [self.x,self.y]
-        self.radius = radius
-        self.width = width
-        self.whichcolumn = column
-        self.whichrow = row
+    '''cursor object'''
 
 
 class TileArtController:
     '''controls the cursor and the state of the tile'''
-    def __init__(self, model):
-        self.model = model
-
-    def handle_keydown_event(self, event):
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                self.model.cursor.pos[0] += -50
-                self.model.cursor.whichcolumn += -1
-            elif event.key == pygame.K_RIGHT:
-                self.model.cursor.pos[0] += +50
-                self.model.cursor.whichcolumn += 1
-            elif event.key == pygame.K_UP:
-                self.model.cursor.pos[1] += -50
-                self.model.cursor.whichrow += -1
-            elif event.key == pygame.K_DOWN:
-                self.model.cursor.pos[1] += +50
-                self.model.cursor.whichrow += 1
-            elif event.key == pygame.K_r:
-                column_of_tile = self.model.cursor.whichcolumn
-                row_of_tile = self.model.cursor.whichrow
-                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['red']
 
 
 class TileArtWindowView:
@@ -106,13 +78,9 @@ class TileArtWindowView:
                                  pygame.Rect(
                                  tile.x, tile.y, tile.width,
                                  tile.height))
-        pygame.draw.circle(self.screen, pygame.Color(
-                         self.model.cursor.color[0],
-                         self.model.cursor.color[1],
-                         self.model.cursor.color[2]),
-                         self.model.cursor.pos, self.model.cursor.radius,
-                         self.model.cursor.width)
         pygame.display.update()
+
+
 
 
 if __name__ == '__main__':
@@ -136,7 +104,7 @@ if __name__ == '__main__':
 
     model = TileArtModel()
     view = TileArtWindowView(model, screen)
-    controller = TileArtController(model)
+    controller = TileArtController()
 
     running = True
 
@@ -144,8 +112,8 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.KEYDOWN:
-                controller.handle_keydown_event(event)
+            # if event.type == pygame.MOUSEMOTION:
+            #     controller.handle_mouse_event(event)
         view.draw()
         time.sleep(.001)
 
