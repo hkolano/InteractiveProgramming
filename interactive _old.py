@@ -15,7 +15,6 @@ class TileArtModel:
             self.columns.append(newcolumn)
 
 
-
 class Column:
     '''definition of a column'''
     def __init__(self, color, x, y):
@@ -105,7 +104,6 @@ class TileArtController:
             elif event.key == pygame.K_t:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['teal']
 
-
 class TileArtWindowView:
     """ A view of brick breaker rendered in a Pygame window """
     def __init__(self, model, screen):
@@ -141,10 +139,10 @@ class TileArtWindowView:
 if __name__ == '__main__':
     pygame.init()
     pygame.mixer.init()
-    guitar = Instrument(['c6gui.wav', 'd6guit.wav', 'e6guit.wav',
-                         'f6guit.wav', 'g6guit.wav', 'a6guit.wav',
-                         'b6guit.wav', 'c7guit.wav'])
-    guitar.e.play()
+#    guitar = Instrument(['c6gui.wav', 'd6guit.wav', 'e6guit.wav',
+#                         'f6guit.wav', 'g6guit.wav', 'a6guit.wav',
+#                         'b6guit.wav', 'c7guit.wav'])
+#    guitar.e.play()
     color_dict = {'green': (0, 255, 0),
                   'blue': (0, 0, 255),
                   'red': (255, 0, 0),
