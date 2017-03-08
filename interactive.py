@@ -13,7 +13,32 @@ class TileArtModel:
         for x in positions:
             newcolumn = Column(color_dict['white'], x, y=10)
             self.columns.append(newcolumn)
+        self.channel1 = pygame.mixer.Channel(1)
+        self.channel2 = pygame.mixer.Channel(2)
+        self.channel3 = pygame.mixer.Channel(3)
+        self.channel4 = pygame.mixer.Channel(4)
+        self.channel5 = pygame.mixer.Channel(5)
+        self.channel6 = pygame.mixer.Channel(6)
+        self.channel7 = pygame.mixer.Channel(7)
+        self.channel0 = pygame.mixer.Channel(0)
+        self.Channels = [self.channel1, self.channel2, self.channel3,
+                        self.channel4, self.channel5, self.channel6,
+                        self.channel7, self.channel0]
 
+
+    def read_column(self):
+        for column in self.columns:
+            time.sleep(.35)
+            for i in range(8):
+                channel = self.Channels[i]
+                if column.tiles[i].color == color_dict['green']:
+                    channel.play(guitar.note_dict[guitar.note_names[i]])
+                # if column.tiles[i].color == color_dict['blue']:
+                #     channel.play(guitar.note_dict[guitar.note_names[i]])
+                # if column.tiles[i].color == color_dict['purple']:
+                #     channel.play(guitar.note_dict[guitar.note_names[i]])
+                # if column.tiles[i].color == color_dict['yellow']:
+                #     channel.play(guitar.note_dict[guitar.note_names[i]])
 
 class Column:
     '''definition of a column'''
@@ -38,21 +63,19 @@ class Tile:
 class Instrument:
     '''defines attributes of an instrument'''
     def __init__(self, notes_list):
-        note_dict = dict()
-        note_names = ['c', 'd', 'e', 'f', 'g', 'a', 'b', 'C']
-        self.channel1 = pygame.mixer.Channel(1)
-        self.channel2 = pygame.mixer.Channel(2)
+        self.note_dict = dict()
+        self.note_names = ['c', 'd', 'e', 'f', 'g', 'a', 'b', 'C']
         for i in range(0, 8):
             pygame.mixer.music.load(notes_list[i])
-            note_dict[note_names[i]] = pygame.mixer.Sound(notes_list[i])
-        self.c = note_dict['c']
-        self.d = note_dict['d']
-        self.e = note_dict['e']
-        self.f = note_dict['f']
-        self.g = note_dict['g']
-        self.a = note_dict['a']
-        self.b = note_dict['b']
-        self.C = note_dict['C']
+            self.note_dict[self.note_names[i]] = pygame.mixer.Sound(notes_list[i])
+        self.c = self.note_dict['c']
+        self.d = self.note_dict['d']
+        self.e = self.note_dict['e']
+        self.f = self.note_dict['f']
+        self.g = self.note_dict['g']
+        self.a = self.note_dict['a']
+        self.b = self.note_dict['b']
+        self.C = self.note_dict['C']
 
 
 class Cursor:
@@ -89,22 +112,18 @@ class TileArtController:
             elif event.key == pygame.K_DOWN:
                 self.model.cursor.pos[1] += +50
                 self.model.cursor.whichrow += 1
-            elif event.key == pygame.K_r:
-                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['red']
             elif event.key == pygame.K_w:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['white']
             elif event.key == pygame.K_g:
-                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['gray']
+                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['green']
             elif event.key == pygame.K_y:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['yellow']
             elif event.key == pygame.K_p:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['purple']
             elif event.key == pygame.K_b:
                 self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['blue']
-            elif event.key == pygame.K_e:
-                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['green']
-            elif event.key == pygame.K_t:
-                self.model.columns[column_of_tile].tiles[row_of_tile].color = color_dict['teal']
+            elif event.key ==pygame.K_m:
+                self.model.read_column()
 
 
 class TileArtWindowView:
@@ -129,13 +148,6 @@ class TileArtWindowView:
                          self.model.cursor.pos, self.model.cursor.radius,
                          self.model.cursor.width)
         pygame.display.update()
-    def read_column(self):
-        for column in self.model.columns:newtile = Tile(color, x, y)
-                positions.append(positions[i] + tile_size + border_size)
-            for i in range(8):
-                if columns[i].color = 'red'
-                newtile = Tile(color, x, y)
-                positions.append(positions[i] + tile_size + border_size)
 
 
 if __name__ == '__main__':
@@ -144,22 +156,19 @@ if __name__ == '__main__':
     guitar = Instrument(['c6gui.wav', 'd6guit.wav', 'e6guit.wav',
                          'f6guit.wav', 'g6guit.wav', 'a6guit.wav',
                          'b6guit.wav', 'c7guit.wav'])
-    trumpet = Instrument(['c4trum.wav', 'd4trum.wav', 'e4trum.wav',
-                          'f4trum.wav', 'g4trum.wav', 'a4trum.wav',
-                          'b4trum.wav', 'c5trum.wav'])
-    cello = Instrument(['c2cello.wav', 'd2cello.wav', 'e2cello.wav',
-                        'f2cello.wav', 'g2cello.wav', 'a2cello.wav',
-                        'b2cello.wav', 'c3cello.wav'])
-    sax = Instrument(['c3sax.wav', 'd3sax.wav', 'e3sax.wav', 'f3sax.wav',
-                      'g3sax.wav', 'a3sax.wav', 'b3sax.wav', 'c4sax.wav'])
+    # trumpet = Instrument(['c4trum.wav', 'd4trum.wav', 'e4trum.wav',
+    #                       'f4trum.wav', 'g4trum.wav', 'a4trum.wav',
+    #                       'b4trum.wav', 'c5trum.wav'])
+    # cello = Instrument(['c2cello.wav', 'd2cello.wav', 'e2cello.wav',
+    #                     'f2cello.wav', 'g2cello.wav', 'a2cello.wav',
+    #                     'b2cello.wav', 'c3cello.wav'])
+    # sax = Instrument(['c3sax.wav', 'd3sax.wav', 'e3sax.wav', 'f3sax.wav',
+    #                   'g3sax.wav', 'a3sax.wav', 'b3sax.wav', 'c4sax.wav'])
     color_dict = {'green': (0, 255, 0),
                   'blue': (0, 0, 255),
-                  'red': (255, 0, 0),
                   'purple': (255, 0, 255),
-                  'teal': (0, 255, 255),
                   'yellow': (255, 255, 0),
                   'white': (255, 255, 255),
-                  'gray': (100, 100, 100)
                   }
 
     size = (810, 410)
@@ -178,6 +187,7 @@ if __name__ == '__main__':
             if event.type == pygame.KEYDOWN:
                 controller.handle_keydown_event(event)
         view.draw()
+        # view.read_column()
         time.sleep(.001)
 
     pygame.quit()
