@@ -3,3 +3,6 @@ This is the base repo for the interactive programming project for Software Desig
 
 Project Proposal:
 https://docs.google.com/document/d/1zxB1_fZSQfpnjvFQml4hSlTJy8tvuK5b5VyDK_mDOws/edit?usp=sharing
+
+Writeup and Reflection:
+
