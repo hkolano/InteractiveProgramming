@@ -32,13 +32,13 @@ class TileArtModel:
             for i in range(8):
                 channel = self.Channels[i]
                 if column.tiles[i].color == color_dict['green']:
-                    channel.play(guitar.note_dict[guitar.note_names[i]])
+                    channel.play(guitar.note_dict[guitar.note_names[7-i]])
                 # if column.tiles[i].color == color_dict['blue']:
-                #     channel.play(guitar.note_dict[guitar.note_names[i]])
+                #     channel.play(guitar.note_dict[guitar.note_names[7-i]])
                 # if column.tiles[i].color == color_dict['purple']:
-                #     channel.play(guitar.note_dict[guitar.note_names[i]])
+                #     channel.play(guitar.note_dict[guitar.note_names[7-i]])
                 # if column.tiles[i].color == color_dict['yellow']:
-                #     channel.play(guitar.note_dict[guitar.note_names[i]])
+                #     channel.play(guitar.note_dict[guitar.note_names[7-i]])
 
 class Column:
     '''definition of a column'''
